@@ -58,7 +58,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: tools
           args: >
             -Dsonar.organization=cospina18_platform-coding-challenge
             -Dsonar.projectKey=cospina18
