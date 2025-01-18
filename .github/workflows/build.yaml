@@ -48,21 +48,20 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements_test.txt
           python -m pip install -r requirements.txt
-          python -m pytest -x --cov=devsecops_engine_tools --cov-config=.coveragerc
+          python -m pytest -x --cov=platform-coding-challenge --cov-config=.coveragerc
           python -m coverage report -m
           python -m coverage xml
 
       - name: Run analysis on SonarQube
         if: ${{ github.event.pull_request.head.repo.fork == false }}
-        uses: SonarSource/sonarqube-scan-action@v2
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           projectBaseDir: tools
           args: >
-            -Dsonar.organization=
-            -Dsonar.projectKey=
+            -Dsonar.organization=cospina18_platform-coding-challenge
+            -Dsonar.projectKey=cospina18
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.language=py
             -Dsonar.verbose=true
