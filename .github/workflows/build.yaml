@@ -65,11 +65,16 @@ jobs:
             -Dsonar.verbose=true
             -Dsonar.exclusions=**/test/**,**/example/**,**setup.py**,**hello_world**,**Dockerfile**,**/coverage/**
             -Dsonar.coverage.exclusions=**/test/**,**/example/**,**setup.py**,**hello_world**,**Dockerfile/**,**/coverage/**
-    
+      
+      - name: Install tools DevSecOps 
+        run: |
+          git clone https://github.com/gitleaks/gitleaks.git
+          cd gitleaks
+          make build
+          python -m pip install -q devsecops-engine-tools
+
       - name: Run DevSecOps engine Toool secret scan
         run: |
-          curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -v -b /usr/local/bin
-          python -m pip install -q devsecops-engine-tools
           output=$(devsecops-engine-tools --platform_devops github --remote_config_repo devsecops_remote_config --tool engine_secret)
             echo "$output"
             if [[ $output == *"✘Failed"* ]]; then
