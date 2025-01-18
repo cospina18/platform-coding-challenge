@@ -42,7 +42,6 @@ jobs:
 
       - name: Run Unit Test
         run: |
-          cd tools/
           python -m virtualenv _venv
           source _venv/bin/activate
           python -m pip install --upgrade pip
