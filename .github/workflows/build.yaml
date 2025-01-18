@@ -58,8 +58,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=cospina18_platform-coding-challenge
-            -Dsonar.projectKey=cospina18
+            -Dsonar.organization=cospina18
+            -Dsonar.projectKey=cospina18_platform-coding-challenge
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.language=py
             -Dsonar.verbose=true
