@@ -70,7 +70,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements_test.txt
           python -m pip install -r requirements.txt
-          python -m pytest -x --cov=. --cov-config=.coveragerc
+          python -m pytest -x --cov=finance --cov-config=.coveragerc
           python -m coverage report -m
           python -m coverage xml
 
@@ -80,6 +80,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
+          projectBaseDir: finance
           args: >
             -Dsonar.organization=cospina18
             -Dsonar.projectKey=cospina18_platform-coding-challenge
