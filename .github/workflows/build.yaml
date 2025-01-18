@@ -69,7 +69,7 @@ jobs:
       - name: Run DevSecOps engine Toool secret scan
         run: |
           python -m pip install -q devsecops-engine-tools
-          output=$(devsecops-engine-tools --platform_devops github --remote_config_repo devsecops_remote_config --tool engine_iac)
+          output=$(devsecops-engine-tools --platform_devops github --remote_config_repo devsecops_remote_config --tool engine_secret)
             echo "$output"
             if [[ $output == *"✘Failed"* ]]; then
               exit 1
