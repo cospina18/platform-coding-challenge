@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: ms_suggestion-vts
+  name: ms-suggestion-vts
   namespace: web-app
 spec:
   hosts:
@@ -14,7 +14,7 @@ spec:
         prefix: /ms_suggestion
     route:
     - destination:
-        host: ms_suggestion
+        host: ms-suggestion
         port:
           number: 5001
   - match:

@@ -23,4 +23,4 @@ RUN apt-get update && apt-get install -y wget curl
 EXPOSE 5001
 
 # Establece el entrypoint para ejecutar la aplicación
-ENTRYPOINT ["python", "finance/web/ms_info/src/applications/runner_ms.py"]
+ENTRYPOINT ["python", "finance/web/ms_suggestion/src/applications/runner_ms.py"]

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ms_suggestion
+  name: ms-suggestion
   namespace: web-app
 spec:
   replicas: 1
