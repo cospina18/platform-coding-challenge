@@ -1,5 +1,6 @@
 from flask import Flask, request
 from finance.web.utilities.services.validation_service import validate_inputs
+from finance.web.ms_info.src.domain.usecases.bancol_info import InfoBancol
 
 app = Flask(__name__)
 
@@ -13,5 +14,9 @@ def saludo():
     ##Caso de uso
     return f'Hola, {nombre}. Tienes {edad} años.'
 
-def init_app():
-    return app
+def init_app(branch, city):
+    global usecase
+    usecase= InfoBancol(branch,city)
+    app.run(host='0.0.0.0', port=5000,debug=True)
+    
+    
