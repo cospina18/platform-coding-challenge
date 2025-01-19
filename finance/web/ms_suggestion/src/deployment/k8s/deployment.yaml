@@ -14,8 +14,8 @@ spec:
         app: ms_suggestion
     spec:
       containers:
-      - name: ms_suggestion
-        image: ms_suggestion:latest
+      - name: ms-suggestion
+        image: mssuggestion:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
