@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ms-info
+  name: ms_suggestion
   namespace: web-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ms-info
+      app: ms_suggestion
   template:
     metadata:
       labels:
-        app: ms-info
+        app: ms_suggestion
     spec:
       containers:
-      - name: ms-info
-        image: ms_info:latest
+      - name: ms_suggestion
+        image: ms_suggestion:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000

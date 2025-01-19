@@ -1,0 +1,26 @@
+# Usa una imagen base oficial de Python
+FROM python:3.9-slim
+
+# Establece el directorio de trabajo en /app
+WORKDIR /app
+# Establece la variable de entorno PYTHONPATH
+ENV PYTHONPATH="${PYTHONPATH}:/app"
+
+# Copia los archivos de requisitos
+COPY requirements.txt requirements.txt
+
+# Instala las dependencias
+
+# Copia el contenido de la aplicación en el contenedor
+COPY finance/web/ms_suggestion/src finance/web/ms_suggestion/src
+COPY finance/web/utilities finance/web/utilities
+
+RUN pip install --no-cache-dir -r requirements.txt
+# Instala wget y curl
+RUN apt-get update && apt-get install -y wget curl
+
+# Expone el puerto en el que la aplicación correrá
+EXPOSE 5001
+
+# Establece el entrypoint para ejecutar la aplicación
+ENTRYPOINT ["python", "finance/web/ms_info/src/applications/runner_ms.py"]
