@@ -3,6 +3,31 @@ from finance.web.ms_info.src.domain.model.gateway.branch_gateway import BranchGa
 
 class Branches(BranchGateway):
 
+    def extract_branch_info(self, data):
+        """
+        Extrae información de las sucursales del dato proporcionado.
+
+        Args:
+            data (dict): Los datos de entrada que contienen información de las sucursales.
+
+        Returns:
+            str: Una cadena con la información de las sucursales y sus horarios si se encuentran,
+                de lo contrario, una cadena indicando que no se encontraron sucursales.
+        """
+        if 'data' in data and 'channels' in data['data']:
+            branches = data['data']['channels']
+            branch_info = []
+
+            for branch in branches:
+                schedules = branch.get('schedules', [])
+                formatted_schedules = "\n".join([f"{schedule['day']}: {schedule['schedules']}" for schedule in schedules])
+                info = f"Oficina: {branch.get('channelName')}\nHorarios:\n{formatted_schedules}"
+                branch_info.append(info)
+
+            return "\n\n" + "\n\n".join(branch_info) + "\n\n"
+        else:
+            return 'Oficina no encontrada cerca.'
+
     def get_bancolombia_branches(self, latitude, longitude):
         # API endpoint
         url = "https://clientes-ext.apps.bancolombia.com/portal-contenidos/physical-point/getBranches"
@@ -54,5 +79,5 @@ class Branches(BranchGateway):
         # Analizar la respuesta JSON
         data = response.json()
         
-        return data
+        return self.extract_branch_info(data)
 

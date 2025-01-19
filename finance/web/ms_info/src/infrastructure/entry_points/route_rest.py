@@ -10,11 +10,11 @@ def saludo():
     edad = request.args.get('edad', 'desconocida')
     cuidad = request.args.get('cuidad', 'Medellin')
     validation_result = validate_inputs(nombre, edad)
-    print(usecase.city.get_city_coordinates(cuidad, 'CO'))
+    local = usecase.local(cuidad)
     if isinstance(validation_result, list):
         return f'Datos invalidos'
     ##Caso de uso
-    return f'Hola, {nombre}. Tienes {edad} años.'
+    return f'Hola, {nombre}. Tienes {edad} años{local}'
 
 def init_app(branch, city):
     global usecase
