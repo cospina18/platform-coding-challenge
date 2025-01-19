@@ -1,4 +1,5 @@
 from flask import Flask, request
+from finance.web.utilities.services.validation_service import validate_inputs
 
 app = Flask(__name__)
 
@@ -6,8 +7,10 @@ app = Flask(__name__)
 def saludo():
     nombre = request.args.get('nombre', 'Visitante')
     edad = request.args.get('edad', 'desconocida')
+    validation_result = validate_inputs(nombre, edad)
+    if isinstance(validation_result, list):
+        return f'Datos invalidos'
     ##Caso de uso
-    
     return f'Hola, {nombre}. Tienes {edad} años.'
 
 def init_app():

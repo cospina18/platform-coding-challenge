@@ -1,4 +1,6 @@
 from finance.web.ms_info.src.infrastructure.entry_points.route_rest import init_app
-def __init__():
-    self.app = init_app()
-    app.run(debug=True)
+
+
+if __name__ == "__main__":
+     app = init_app()
+     app.run(debug=True)
