@@ -9,7 +9,7 @@ class InfoBancol:
         city_name = "Rionegro"
         country_code = "CO"  # Código de país para Colombia
 
-        latitude, longitude = self.city.get_city_coordinates(branch)
+        latitude, longitude = self.city.get_city_coordinates(city_name, country_code)
 
         branches_data = self.branch.get_bancolombia_branches(latitude, longitude)
         print(branches_data)

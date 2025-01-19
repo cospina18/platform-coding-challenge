@@ -3,7 +3,7 @@ from finance.web.ms_info.src.domain.model.gateway.branch_gateway import BranchGa
 
 class Branches(BranchGateway):
 
-    def get_bancolombia_branches(latitude, longitude):
+    def get_bancolombia_branches(self, latitude, longitude):
         # API endpoint
         url = "https://clientes-ext.apps.bancolombia.com/portal-contenidos/physical-point/getBranches"
         

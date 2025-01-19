@@ -8,7 +8,9 @@ app = Flask(__name__)
 def saludo():
     nombre = request.args.get('nombre', 'Visitante')
     edad = request.args.get('edad', 'desconocida')
+    cuidad = request.args.get('cuidad', 'Medellin')
     validation_result = validate_inputs(nombre, edad)
+    print(usecase.city.get_city_coordinates(cuidad, 'CO'))
     if isinstance(validation_result, list):
         return f'Datos invalidos'
     ##Caso de uso

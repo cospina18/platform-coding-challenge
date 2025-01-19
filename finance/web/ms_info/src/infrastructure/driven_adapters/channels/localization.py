@@ -3,7 +3,8 @@ from finance.web.ms_info.src.domain.model.gateway.city_gateway import CityGatewa
 
 class CityCoordinates(CityGateway):
 
-    def get_city_coordinates(city_name, country_code):
+
+    def get_city_coordinates(self, city_name, country_code):
         # API endpoint
         url = "https://geocode.xyz"
         
@@ -24,3 +25,5 @@ class CityCoordinates(CityGateway):
         longitude = data.get('longt')
         
         return latitude, longitude
+
+
