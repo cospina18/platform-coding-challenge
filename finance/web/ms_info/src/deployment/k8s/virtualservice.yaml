@@ -7,19 +7,13 @@ spec:
   hosts:
   - "*"
   gateways:
-  - istio-system/istio-ingressgateway
+  - ms-info-gateway
   http:
   - match:
     - uri:
         prefix: /ms_info
     route:
     - destination:
-        host: ms-info
+        host: ms-info-app-service
         port:
-          number: 5000
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: blackhole
+          number: 80

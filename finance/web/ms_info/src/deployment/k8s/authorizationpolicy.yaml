@@ -1,0 +1,12 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-all
+  namespace: web-app
+spec:
+  action: DENY
+  rules:
+  - to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/"]

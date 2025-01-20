@@ -1,9 +1,16 @@
 from pydantic import ValidationError
 from finance.web.utilities.models.input_model import InputModel
 
-def validate_inputs(input1, input2):
+def validate_field(value):
     try:
-        data = InputModel(input_str=input1, input_int=input2)
-        return data
+        if isinstance(value, str):
+            InputModel(input_str=value)
+        elif isinstance(value, int):
+            InputModel(input_int=value)
+        else:
+            raise ValueError('Unsupported type')
+        return {"valid": True}
     except ValidationError as e:
-        return e.errors()
+        return {"valid": False, "errors": e.errors()}
+    except ValueError as e:
+        return {"valid": False, "errors": [{"msg": str(e)}]}

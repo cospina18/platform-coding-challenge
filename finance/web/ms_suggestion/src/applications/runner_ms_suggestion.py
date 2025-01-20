@@ -1,8 +1,8 @@
-from finance.web.ms_suggestion.src.infrastructure.entry_points.route_rest_ms_suggestion import init_app
+from finance.web.ms_suggestion.src.infrastructure.entry_points.route_rest_ms_suggestion import init_app_suggestion
 
 
 def runner_ms_suggestion():
-     return init_app( )
+     return init_app_suggestion( )
 
 
 if __name__ == "__main__":

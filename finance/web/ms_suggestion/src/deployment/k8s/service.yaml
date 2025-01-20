@@ -8,6 +8,6 @@ spec:
     app: ms-suggestion
   ports:
     - protocol: TCP
-      port: 80
+      port: 81
       targetPort: 5001
   type: LoadBalancer
