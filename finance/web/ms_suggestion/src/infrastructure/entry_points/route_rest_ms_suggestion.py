@@ -25,7 +25,7 @@ def suggestion():
         else:
             return {"message": "input invalid"}
         data = {
-            'mensaje': f'Hola, {name}. puedes aprovechar para invertir en {city} visitanos en nuestras sedes.'
+            'mensaje': f'Hola, {name}. puedes aprovechar para invertir!! visitanos en nuestras sedes.'
         }
         return jsonify(data)
     except Exception as e:
