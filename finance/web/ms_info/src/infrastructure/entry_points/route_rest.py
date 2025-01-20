@@ -27,12 +27,13 @@ def ms_info():
             return {"message": "input invalid"}
         
         ##Caso de uso
-        local = usecase.local(name, age, city)
+        investment, branch = usecase.local(name, age, city)
         response = {
             'name': name,
             'age': age,
             'city': city,
-            'message': local 
+            'location': branch,
+            'message_suggestion' : investment 
         }
 
         return jsonify(response)
