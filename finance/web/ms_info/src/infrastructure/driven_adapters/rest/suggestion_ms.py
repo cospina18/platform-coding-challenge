@@ -5,7 +5,7 @@ class Investment(InvestmentGateway):
 
     def get_investment_suggestion(self, name, city, age):
         # Definir la URL
-        url = "http://ms-suggestion-app-service:81/ms_suggestion"
+        url = "http://ms-suggestion-app-service.web-app.svc.cluster.local:81/ms_suggestion"
         params = {
             'nombre': name,
             'edad': age,
