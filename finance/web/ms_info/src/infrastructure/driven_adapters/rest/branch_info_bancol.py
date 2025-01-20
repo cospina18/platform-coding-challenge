@@ -16,15 +16,7 @@ class Branches(BranchGateway):
         """
         if 'data' in data and 'channels' in data['data']:
             branches = data['data']['channels']
-            branch_info = []
-
-            for branch in branches:
-                schedules = branch.get('schedules', [])
-                formatted_schedules = "\n".join([f"{schedule['day']}: {schedule['schedules']}" for schedule in schedules])
-                info = f"Oficina: {branch.get('channelName')}\nHorarios:\n{formatted_schedules}"
-                branch_info.append(info)
-
-            return "\n\n" + "\n\n".join(branch_info) + "\n\n"
+            return branches
         else:
             return 'Oficina no encontrada cerca.'
 

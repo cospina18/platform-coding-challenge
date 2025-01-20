@@ -11,5 +11,14 @@ class InputModel(BaseModel):
             raise ValueError('input_str must not contain special characters')
         return value
 
+    @field_validator('input_int', mode='before')
+    def validate_and_convert_int(cls, value):
+        if isinstance(value, str):
+            if value.isdigit():
+                value = int(value)
+            else:
+                raise ValueError('input_int must be a number')
+        return value
+
     class Config:
         anystr_strip_whitespace = True

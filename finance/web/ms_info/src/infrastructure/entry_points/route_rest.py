@@ -7,9 +7,25 @@ app = Flask(__name__)
 @app.route('/ms_info')
 def ms_info():
     try:
-        name = validate_field(request.args.get('nombre', 'Visitante'))
-        age = validate_field(request.args.get('edad', 'desconocida'))
-        city = validate_field(request.args.get('cuidad', 'Medellin'))
+        input = request.args.get('nombre', 'Visitante')
+        validation_result = validate_field(input)
+        if validation_result["valid"]:
+            name = validation_result["value"]
+        else:
+            return {"message": "input invalid"}
+        input = request.args.get('edad', '18')
+        validation_result = validate_field(input)
+        if validation_result["valid"]:
+            age = validation_result["value"]
+        else:
+            return {"message": "input invalid"}
+        input = request.args.get('cuidad', 'Medellin')
+        validation_result = validate_field(input)
+        if validation_result["valid"]:
+            city = validation_result["value"]
+        else:
+            return {"message": "input invalid"}
+        
         ##Caso de uso
         local = usecase.local(name, age, city)
         response = {
