@@ -1,25 +1,19 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: ms-suggestion-vts
+  name: ms-info
   namespace: web-app
 spec:
   hosts:
   - "*"
   gateways:
-  - istio-system/istio-ingressgateway
+  - ms-suggestion-gateway
   http:
   - match:
     - uri:
         prefix: /ms_suggestion
     route:
     - destination:
-        host: ms-suggestion
+        host: ms-suggestion-app-service
         port:
-          number: 5001
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: blackhole
+          number: 81

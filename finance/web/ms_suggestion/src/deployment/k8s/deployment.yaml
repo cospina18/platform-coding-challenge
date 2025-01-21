@@ -15,7 +15,6 @@ spec:
     spec:
       containers:
       - name: ms-suggestion
-        image: ms_suggestion:latest
-        imagePullPolicy: Never
+        image: 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion
         ports:
         - containerPort: 5000
