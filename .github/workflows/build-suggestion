@@ -1,0 +1,40 @@
+name: Build and Push Docker Image to ECR
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t ms-suggestion:latest ./platform-coding-challenge/feature/pipelines/finance/web/ms_suggestion/src/deployment/docker
+
+    - name: Tag Docker image
+      run: |
+        IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/ms-suggestion:latest"
+        docker tag ms-suggestion:latest $IMAGE_URI
+
+    - name: Push Docker image to ECR
+      run: |
+        docker push ${{ steps.login-ecr.outputs.registry }}/ms-suggestion:latest
