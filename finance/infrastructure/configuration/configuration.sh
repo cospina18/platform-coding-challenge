@@ -56,7 +56,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingre
 echo ====================================================
 echo Crear Service Account para ALB
 echo ====================================================
-eksctl create iamserviceaccount --region us-east-1 --name alb-ingress-controller --namespace kube-system --cluster  eks-p-poc --attach-policy-arn arn:aws:iam::2715-9024-8982:policy/ALBIngressControllerIAMPolicy --override-existing-serviceaccounts
+eksctl create iamserviceaccount --region us-east-1 --name alb-ingress-controller --namespace kube-system --cluster  eks-p-poc --attach-policy-arn arn:aws:iam::271590248982:policy/ALBIngressControllerIAMPolicy --override-existing-serviceaccounts
 
 echo ====================================================
 echo Crear ALB Ingress Controller
@@ -74,8 +74,6 @@ arncertificateext=$(aws acm list-certificates --query "CertificateSummaryList[?c
 echo ====================================================
 echo Instalar cluster autoscaler
 echo ====================================================
-# kubectl apply -f  $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/cluster-autoscaler.yaml
-
 
 #######################################################################################
 #######################################################################################
