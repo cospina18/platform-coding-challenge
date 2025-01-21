@@ -9,7 +9,6 @@ metadata:
     business-service: devsecops-poc
 vpc:
   id: vpc-00b41acca89c59d9c
-  cidr: 10.100.0.0/16 # (optional, must match CIDR used by the given VPC)
   subnets:
     public:
       us-east-1a:
