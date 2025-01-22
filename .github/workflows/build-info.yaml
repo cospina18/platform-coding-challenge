@@ -31,11 +31,6 @@ jobs:
       run: |
         docker build -t 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_info -f finance/web/ms_info/src/deployment/docker/dockerfile .  --label test_ms_info
 
-    - name: Tag Docker image
-      run: |
-        IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/ms-info:latest"
-        docker tag ms-info:latest $IMAGE_URI
-
     - name: Push Docker image to ECR
       run: |
-        docker push ${{ steps.login-ecr.outputs.registry }}/ms-info:latest
+        docker push 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_info
