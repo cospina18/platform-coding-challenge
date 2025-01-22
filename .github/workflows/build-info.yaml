@@ -30,6 +30,7 @@ jobs:
     - name: Build Docker image
       run: |
         docker build -t ms-info:latest ./platform-coding-challenge/finance/web/ms_info/src/deployment/docker/dockerfile
+        docker build -t 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_info -f finance/web/ms_info/src/deployment/docker/dockerfile .  --label test_ms_info
 
     - name: Tag Docker image
       run: |
