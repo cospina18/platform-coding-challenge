@@ -29,9 +29,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ms-suggestion:latest ./platform-coding-challenge/feature/pipelines/finance/web/ms_suggestion/src/deployment/docker
-
-    - name: Tag Docker image
+        docker build -t ms-suggestion:latest ./platform-coding-challenge/finance/web/ms_suggestion/src/deployment/Docker/dockerfile
       run: |
         IMAGE_URI="${{ steps.login-ecr.outputs.registry }}/ms-suggestion:latest"
         docker tag ms-suggestion:latest $IMAGE_URI
