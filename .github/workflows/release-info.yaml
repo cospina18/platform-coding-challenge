@@ -27,6 +27,11 @@ jobs:
       run: |
         aws eks update-kubeconfig --region us-east-1 --name poc-devsecops
 
+    - name: Cleanup previous resources
+      run: |
+        kubectl delete -f finance/web/ms_info/src/deployment/k8s/deployment.yaml -n default || true
+        kubectl delete -f finance/web/ms_info/src/deployment/k8s/service.yaml -n default || true
+
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f finance/web/ms_info/src/deployment/k8s/deployment.yaml
