@@ -46,7 +46,7 @@ data:
       <parse>
         @type json
         time_key time
-        time_format %Y-%m-%dT%H:%M:%S.%NZ
+        time_format "#{ENV['FLUENT_CONTAINER_TAIL_PARSER_TIME_FORMAT'] || '%Y-%m-%dT%H:%M:%S.%NZ'}"
       </parse>
     </source>
     <match kubernetes.web-app.**>
