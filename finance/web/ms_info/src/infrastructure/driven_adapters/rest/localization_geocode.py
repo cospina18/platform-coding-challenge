@@ -1,5 +1,8 @@
 import requests
+import logging
 from finance.web.ms_info.src.domain.model.gateway.city_gateway import CityGateway
+# Logger definido a nivel de módulo
+logger = logging.getLogger(__name__)
 
 class CityCoordinates(CityGateway):
 
@@ -23,6 +26,7 @@ class CityCoordinates(CityGateway):
         # Extraer latitud y longitud
         latitude = data.get('latt')
         longitude = data.get('longt')
+        logger.info(" Request ok https://geocode.xyz ")
         
         return latitude, longitude
 

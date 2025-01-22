@@ -1,12 +1,16 @@
+import logging
 from finance.web.ms_info.src.infrastructure.entry_points.route_rest import init_app
 from finance.web.ms_info.src.infrastructure.driven_adapters.rest.branch_info_bancol import Branches
 from finance.web.ms_info.src.infrastructure.driven_adapters.rest.localization_geocode import CityCoordinates
 from finance.web.ms_info.src.infrastructure.driven_adapters.rest.suggestion_ms import Investment
+from finance.web.utilities.services.fluentd_logs import configure_logging
 
-#test
-#from finance.web.ms_suggestion.src.infrastructure.entry_points.route_rest_ms_suggestion import init_app_suggestion
+
+# Inicializa la configuración de logging
+configure_logging()
 
 def runner_ms_info():
+     logging.getLogger(__name__)
      branch = Branches()
      city = CityCoordinates()
      investment = Investment()

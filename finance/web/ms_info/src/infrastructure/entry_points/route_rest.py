@@ -1,7 +1,9 @@
+import logging
 from flask import Flask, jsonify, request
 from finance.web.utilities.services.validation_service import validate_field
 from finance.web.ms_info.src.domain.usecases.bancol_info import InfoBancol
 
+logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 @app.route('/ms_info')
@@ -35,9 +37,10 @@ def ms_info():
             'location': branch,
             'message_suggestion' : investment 
         }
-
+        logger.info("Respuesta exitosa 200ok")
         return jsonify(response)
     except Exception as e:
+        logger.info("Se presento un error")
         return jsonify({"error": "Se presentó un error", "detalle": str(e)}), 400
      
 

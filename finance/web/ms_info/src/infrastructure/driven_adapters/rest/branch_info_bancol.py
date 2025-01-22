@@ -1,7 +1,13 @@
 import requests
+import logging
 from finance.web.ms_info.src.domain.model.gateway.branch_gateway import BranchGateway
 
+
+# Logger definido a nivel de módulo
+logger = logging.getLogger(__name__)
+
 class Branches(BranchGateway):
+
 
     def extract_branch_info(self, data):
         """

@@ -1,3 +1,4 @@
+import logging
 from finance.web.ms_info.src.domain.model.gateway.city_gateway import CityGateway
 from finance.web.ms_info.src.domain.model.gateway.branch_gateway import BranchGateway
 from finance.web.ms_info.src.domain.model.gateway.investment_gateway import InvestmentGateway

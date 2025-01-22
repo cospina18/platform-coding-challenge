@@ -84,3 +84,5 @@ echo ====================================================
  kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/role.yaml
 
  kubectl get secrets
+
+kubectl create configmap cluster-info --from-literal=cluster.name=poc-devsecops --from-literal=logs.region=us-east-1 -n amazon-cloudwatch

@@ -1,5 +1,8 @@
 import requests
+import logging
 from finance.web.ms_info.src.domain.model.gateway.investment_gateway import InvestmentGateway
+# Logger definido a nivel de módulo
+logger = logging.getLogger(__name__)
 
 class Investment(InvestmentGateway):
 
@@ -18,6 +21,7 @@ class Investment(InvestmentGateway):
         # Verificar si la solicitud fue exitosa
         if response.status_code == 200:
             # Imprimir la respuesta en formato JSON
+            logger.info("request ms-suggestion-app-service.web-app.svc.cluster.local ok")
             return response.json()
         else:
             return f"Error: {response.status_code}"
