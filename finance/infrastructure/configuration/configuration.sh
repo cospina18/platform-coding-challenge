@@ -67,7 +67,7 @@ echo =====================================================================
 echo Crear Ingress Service que crea los ALB para el cluster  EKS
 echo =====================================================================
 
-arncertificateext=$(aws acm list-certificates --query "CertificateSummaryList[?contains(DomainName,'poc-devsecops.apps.ambientesbc.com')].CertificateArn" --output text)
+arncertificateext=$(aws acm list-certificates --query "CertificateSummaryList[?contains(DomainName,'eks-p-poc.ext.infobranches.com')].CertificateArn" --output text)
 
 # kubectl apply -n istio-system -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/ingress.yaml
 
@@ -85,4 +85,12 @@ echo ====================================================
 
  kubectl get secrets
 
-kubectl create configmap cluster-info --from-literal=cluster.name=poc-devsecops --from-literal=logs.region=us-east-1 -n amazon-cloudwatch
+#######################################################################################
+#######################################################################################
+##############     FLUENTD        ##################
+#######################################################################################
+#######################################################################################
+
+kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/amazon-cloudwatch.yaml
+kubectl create configmap cluster-info --from-literal=cluster.name=eks-p-poc --from-literal=logs.region=us-east-1 -n amazon-cloudwatch
+kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/fluentd.yaml
