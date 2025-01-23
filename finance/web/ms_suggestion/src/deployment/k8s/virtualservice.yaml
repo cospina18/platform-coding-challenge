@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ms-info
+  namespace: web-app
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - ms-suggestion-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /ms_suggestion
+    route:
+    - destination:
+        host: ms-suggestion-app-service
+        port:
+          number: 81

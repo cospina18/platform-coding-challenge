@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-suggestion
+  namespace: web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-suggestion
+  template:
+    metadata:
+      labels:
+        app: ms-suggestion
+    spec:
+      containers:
+      - name: ms-suggestion
+        image: 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion3
+        ports:
+        - containerPort: 5000
