@@ -1,6 +1,6 @@
 # platform-coding-challenge arquitectura de la implementacion
 # Arquitectura
-La solucion se compone de dos microservicios desplegados en EKS. 
+La solucion se compone de dos microservicios desplegados en EKS. Usando istio como service mesh. 
 ![alt text](image.png)
 
 
@@ -11,6 +11,8 @@ https://ms-info.demo-riders.link/ms_info?nombre=Juan&edad=70&cuidad=Medellin
 
 ms_suggestion dummy de mensaje sugerido para invertir. 
 https://ms-info.demo-riders.link/ms_suggestion?nombre=Juan&edad=70&cuidad=Medellin
+
+
 
 # Configuraciones locales linux o WSL
 1. en la carpeta configuration ejecutar el archivo install_minikube sino lo tiene instalado.
