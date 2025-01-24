@@ -45,7 +45,7 @@ jobs:
     - name: DevSecOps Engine Tool - Container
       run: |
         pip3 install -q devsecops-engine-tools
-        output=$(devsecops-engine-tools --platform_devops github --remote_config_repo devsecops_remote_config --tool engine_container)
+        output=$(devsecops-engine-tools --platform_devops github --remote_config_repo devsecops_remote_config --tool engine_iac)
         echo "$output"
         if [[ $output == *"✘Failed"* ]]; then
           exit 1
