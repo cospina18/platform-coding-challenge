@@ -67,7 +67,7 @@ echo =====================================================================
 echo Crear Ingress Service que crea los ALB para el cluster  EKS
 echo =====================================================================
 
-arncertificateext=$(aws acm list-certificates --query "CertificateSummaryList[?contains(DomainName,'eks-p-poc.ext.infobranches.com')].CertificateArn" --output text)
+arncertificateext=$(aws acm list-certificates --query "CertificateSummaryList[?contains(DomainName,' ms_info.demo-riders.link')].CertificateArn" --output text)
 
 # kubectl apply -n istio-system -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/ingress.yaml
 
@@ -94,3 +94,6 @@ echo ====================================================
 kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/amazon-cloudwatch.yaml
 kubectl create configmap cluster-info --from-literal=cluster.name=eks-p-poc --from-literal=logs.region=us-east-1 -n amazon-cloudwatch
 kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/fluentd.yaml
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=ms_info.demo-riders.link O=ms_info.demo-riders.link"
+kubectl create secret tls tls-cert --key tls.key --cert tls.crt
