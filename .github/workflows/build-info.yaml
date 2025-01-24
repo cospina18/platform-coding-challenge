@@ -3,7 +3,7 @@ name: Build_ms_info
 on:
   push:
     branches:
-      - main
+      - trunk
       - feature/*
 
 jobs:

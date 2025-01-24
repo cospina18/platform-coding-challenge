@@ -3,7 +3,7 @@ name: Build_ms_suggestion
 on:
   push:
     branches:
-      - main
+      - trunk
       - feature/*
 
 jobs:
