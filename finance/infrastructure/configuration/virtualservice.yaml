@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vrt-service
+  namespace: web-app
+spec:
+  hosts:
+  - "ms-info.demo-riders.link"  # Dominio único
+  gateways:
+  - istio-system/webapp-gateway
+  http:
+  - match:
+    - uri:
+        prefix: "/ms_info"  # Ruta para el servicio 1
+    route:
+    - destination:
+        host: ms-info-app-service
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: "/ms_suggestion"  # Ruta para el servicio 2
+    route:
+    - destination:
+        host: ms-suggestion-app-service
+        port:
+          number: 81

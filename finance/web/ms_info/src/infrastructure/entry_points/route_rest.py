@@ -6,6 +6,14 @@ from finance.web.ms_info.src.domain.usecases.bancol_info import InfoBancol
 logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
+@app.route('/liveness')
+def liveness():
+    return 'OK', 200
+
+@app.route('/readiness')
+def readiness():
+    return 'OK', 200
+
 @app.route('/ms_info')
 def ms_info():
     try:

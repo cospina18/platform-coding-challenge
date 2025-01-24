@@ -16,8 +16,6 @@ COPY finance/web/ms_suggestion/src finance/web/ms_suggestion/src
 COPY finance/web/utilities finance/web/utilities
 
 RUN pip install --no-cache-dir -r requirements.txt
-# Instala wget y curl
-RUN apt-get update && apt-get install -y wget curl
 
 # Expone el puerto en el que la aplicación correrá
 EXPOSE 5001

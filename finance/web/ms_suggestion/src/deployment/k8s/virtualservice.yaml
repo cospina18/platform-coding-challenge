@@ -4,10 +4,10 @@ metadata:
   name: ms-info
   namespace: web-app
 spec:
-  hosts:
-  - "*"
+  hosts: 
+  - "ms-info.demo-riders.link"
   gateways:
-  - ms-suggestion-gateway
+  - istio-system/ms-suggestion-gateway
   http:
   - match:
     - uri:
