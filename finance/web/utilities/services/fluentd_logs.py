@@ -6,6 +6,10 @@ def configure_logging():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
+    # Eliminar todos los handlers existentes
+    for handler in logger.handlers[:]:
+        logger.removeHandler(handler)
+
     # Handler para salida estándar (stdout)
     stdout_handler = logging.StreamHandler(sys.stdout)
     stdout_handler.setLevel(logging.DEBUG)
@@ -36,5 +40,3 @@ class StreamToLogger:
 
     def flush(self):
         pass
-
-# Configurar el logging al inicio de tu aplicación

@@ -2,12 +2,10 @@ import requests
 import logging
 from finance.web.ms_info.src.domain.model.gateway.branch_gateway import BranchGateway
 
-
 # Logger definido a nivel de módulo
 logger = logging.getLogger(__name__)
 
 class Branches(BranchGateway):
-
 
     def extract_branch_info(self, data):
         """
@@ -27,11 +25,27 @@ class Branches(BranchGateway):
             return 'Oficina no encontrada cerca.'
 
     def get_bancolombia_branches(self, latitude, longitude):
-        # API endpoint
-        url = "https://clientes-ext.apps.bancolombia.com/portal-contenidos/physical-point/getBranches"
+        try:
+            # Realizar la solicitud a la API
+            response = self._make_request(latitude, longitude)
+            
+            # Analizar la respuesta JSON
+            data = response.json()
+            
+            return self.extract_branch_info(data)
         
-        # Encabezados para la solicitud de la API
-        headers = {
+        except requests.RequestException as e:
+            logger.error("Request failed: %s", e)
+            return 'Error en la solicitud de sucursales.'
+
+    def _make_request(self, latitude, longitude):
+        url = "https://clientes-ext.apps.bancolombia.com/portal-contenidos/physical-point/getBranches"
+        headers = self._build_headers()
+        payload = self._build_payload(latitude, longitude)
+        return requests.post(url, headers=headers, json=payload)
+
+    def _build_headers(self):
+        return {
             "Accept": "application/vnd.bancolombia.v3+json",
             "Content-Type": "application/vnd.bancolombia.v3+json",
             "Ip": "Anonimo",
@@ -41,9 +55,9 @@ class Branches(BranchGateway):
             "Accept-Encoding": "gzip, deflate, br",
             "Accept-Language": "es-ES,es;q=0.9"
         }
-        
-        # Carga útil para la solicitud de la API
-        payload = {
+
+    def _build_payload(self, latitude, longitude):
+        return {
             "meta": {
                 "channel": "Portal",
                 "typeDocumentCode": "NA",
@@ -70,12 +84,3 @@ class Branches(BranchGateway):
                 "searchRadius": 2
             }
         }
-        
-        # Realizar la solicitud a la API
-        response = requests.post(url, headers=headers, json=payload)
-        
-        # Analizar la respuesta JSON
-        data = response.json()
-        
-        return self.extract_branch_info(data)
-
