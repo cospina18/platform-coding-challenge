@@ -1,23 +1,32 @@
 import requests
+import logging
 from finance.web.ms_info.src.domain.model.gateway.investment_gateway import InvestmentGateway
+# Logger definido a nivel de módulo
+logger = logging.getLogger(__name__)
 
 class Investment(InvestmentGateway):
 
     def get_investment_suggestion(self, name, city, age):
-        # Definir la URL
-        url = "http://ms-suggestion-app-service.web-app.svc.cluster.local:81/ms_suggestion"
-        params = {
+        url = self._build_url()
+        params = self._build_params(name, city, age)
+        return self._make_request(url, params)
+
+    def _build_url(self):
+        return "http://ms-suggestion-app-service.web-app.svc.cluster.local:81/ms_suggestion"
+
+    def _build_params(self, name, city, age):
+        return {
             'nombre': name,
             'edad': age,
             'ciudad': city
         }
 
-        # Hacer la solicitud GET
-        response = requests.get(url, params=params)
-
-        # Verificar si la solicitud fue exitosa
-        if response.status_code == 200:
-            # Imprimir la respuesta en formato JSON
+    def _make_request(self, url, params):
+        try:
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            logger.info("request ms-suggestion-app-service.web-app.svc.cluster.local ok")
             return response.json()
-        else:
-            return f"Error: {response.status_code}"
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Error en la solicitud: {e}")
+            return f"Error: suggestion unavailable"

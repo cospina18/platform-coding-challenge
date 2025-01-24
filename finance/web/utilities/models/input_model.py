@@ -18,6 +18,8 @@ class InputModel(BaseModel):
                 value = int(value)
             else:
                 raise ValueError('input_int must be a number')
+        elif not isinstance(value, int):
+            raise ValueError('input_int must be a number')
         return value
 
     class Config:

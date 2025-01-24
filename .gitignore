@@ -5,6 +5,7 @@ _venv/
 *$py.class
 .vscode/
 
+
 # C extensions
 *.so
 

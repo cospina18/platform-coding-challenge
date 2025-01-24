@@ -1,31 +1,17 @@
+import logging
 from flask import Flask, jsonify, request
-from finance.web.utilities.services.validation_service import validate_field
+from finance.web.utilities.services.validation_service import validate_field , validate_and_extract
 from finance.web.ms_info.src.domain.usecases.bancol_info import InfoBancol
 
+logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 @app.route('/ms_info')
 def ms_info():
     try:
-        input = request.args.get('nombre', 'Visitante')
-        validation_result = validate_field(input)
-        if validation_result["valid"]:
-            name = validation_result["value"]
-        else:
-            return {"message": "input invalid"}
-        input = request.args.get('edad', '18')
-        validation_result = validate_field(input)
-        if validation_result["valid"]:
-            age = validation_result["value"]
-        else:
-            return {"message": "input invalid"}
-        input = request.args.get('cuidad', 'Medellin')
-        validation_result = validate_field(input)
-        if validation_result["valid"]:
-            city = validation_result["value"]
-        else:
-            return {"message": "input invalid"}
-        
+        name = validate_and_extract(request.args, 'nombre', 'Visitante', 'str')
+        age = validate_and_extract(request.args, 'edad', '18', 'int')
+        city = validate_and_extract(request.args, 'cuidad', 'Medellin', 'str')
         ##Caso de uso
         investment, branch = usecase.local(name, age, city)
         response = {
@@ -35,9 +21,12 @@ def ms_info():
             'location': branch,
             'message_suggestion' : investment 
         }
-
+        logger.info("Respuesta exitosa 200ok")
         return jsonify(response)
+    except ValueError as e:
+        return {"message": str(e)}, 400
     except Exception as e:
+        logger.info("Se presento un error")
         return jsonify({"error": "Se presentó un error", "detalle": str(e)}), 400
      
 

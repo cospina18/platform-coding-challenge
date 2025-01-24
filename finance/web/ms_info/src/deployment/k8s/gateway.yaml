@@ -1,15 +1,24 @@
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: ms-info-gateway
-  namespace: web-app
+  namespace: istio-system
 spec:
   selector:
-    istio: ingressgateway # Usa el selector para el pod del gateway de ingreso
+    istio: ingressgateway  # Este es el selector para el gateway de ingreso de Istio
   servers:
   - port:
       number: 80
       name: http
       protocol: HTTP
     hosts:
-    - "*"
+    - "*"  # Dominio para HTTP
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: tls-cert  # El secreto que contiene el certificado TLS
+    hosts:
+    - "ms-info.demo-riders.link"  # Dominio para HTTPS

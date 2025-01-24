@@ -26,3 +26,4 @@ echo =====================================
 echo Validar pod
 echo =====================================
 kubectl get po --all-namespaces
+

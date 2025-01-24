@@ -6,7 +6,7 @@ metadata:
   tags:
     project-name: eksppoc
     environment: dev
-    business-service: devsecops-poc
+    business-service: eks-p-poc
 vpc:
   id: vpc-00b41acca89c59d9c
   subnets:
@@ -44,7 +44,7 @@ nodeGroups:
     tags:
       project-name: eksppoc
       environment: dev
-      business-service: devsecops-poc
+      business-service: eks-p-poc
 cloudWatch:
   clusterLogging:
     # enable specific types of cluster control plane logs

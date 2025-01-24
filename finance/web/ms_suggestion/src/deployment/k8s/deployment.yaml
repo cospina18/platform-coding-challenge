@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: ms-suggestion
-        image: 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion
+        image: 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion3
         ports:
         - containerPort: 5000

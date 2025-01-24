@@ -4,10 +4,10 @@ metadata:
   name: ms-info
   namespace: web-app
 spec:
-  hosts:
-  - "*"
+  hosts: 
+  - "ms-info.demo-riders.link"
   gateways:
-  - ms-info-gateway
+  - istio-system/ms-info-gateway
   http:
   - match:
     - uri:
@@ -16,4 +16,4 @@ spec:
     - destination:
         host: ms-info-app-service
         port:
-          number: 80
+          number: 80  
