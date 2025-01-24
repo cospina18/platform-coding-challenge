@@ -40,7 +40,7 @@ jobs:
     - name: DevSecOps Engine Tool - Trivy
       run: |
         pip3 install -q devsecops-engine-tools
-        output=$(devsecops-engine-tools --platform_devops github --remote_config_repo devsecops_remote_config --tool engine_container --image_to_scan 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_info)
+        output=$(devsecops-engine-tools --platform_devops github --remote_config_repo devsecops_remote_config --tool engine_container --image_to_scan poc-devsecops:ms_info)
         echo "$output"
         if [[ $output == *"✘Failed"* ]]; then
           exit 1
