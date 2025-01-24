@@ -29,7 +29,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion -f finance/web/ms_suggestion/src/deployment/docker/dockerfile . --label test_ms_suggestions
+        docker build -t 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion -f finance/web/ms_suggestion/src/deployment/Docker/dockerfile . --label test_ms_suggestions
 
     - name: Push Docker image to ECR
       run: |
