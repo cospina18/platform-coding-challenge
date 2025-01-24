@@ -2,16 +2,15 @@ name: Release ms-suggestion to EKS
 
 on:
   workflow_run:
-    workflows: ["Build_ms_suggestion"]
+    workflows:
+      - Build_ms_suggestion
     types:
       - completed
-
 
 jobs:
   deploy:
     name: Deploy to EKS
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
     - name: Checkout code
