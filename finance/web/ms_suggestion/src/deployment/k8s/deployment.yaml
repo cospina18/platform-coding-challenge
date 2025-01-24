@@ -4,7 +4,7 @@ metadata:
   name: ms-suggestion
   namespace: web-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: ms-suggestion
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: ms-suggestion
-        image: 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion3
+        image: 271590248982.dkr.ecr.us-east-1.amazonaws.com/poc-devsecops:ms_suggestion
         ports:
         - containerPort: 5000

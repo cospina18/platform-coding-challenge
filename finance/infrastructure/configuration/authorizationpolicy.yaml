@@ -1,11 +1,11 @@
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-ms-info
+  name: allow-ms-suggestion
   namespace: web-app
 spec:
   action: ALLOW
   rules:
   - to:
     - operation:
-        paths: ["/ms_info"]
+        paths: ["/ms_suggestion","/ms_info"]
