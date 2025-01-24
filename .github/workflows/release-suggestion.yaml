@@ -3,9 +3,13 @@ name: Release ms-suggestion to EKS
 on:
   workflow_run:
     workflows:
-      - Build_ms_suggestion
+      - BuildSuggestion 
     types:
       - completed
+
+permissions:
+  actions: write
+  contents: read
 
 jobs:
   deploy:
