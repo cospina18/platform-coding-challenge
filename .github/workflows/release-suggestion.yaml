@@ -1,10 +1,15 @@
 name: Release ms-suggestion to EKS
 
 on:
-  push:
-    branches:
-      - trunk
-      - feature/*
+  workflow_run:
+    workflows:
+      - BuildSuggestion 
+    types:
+      - completed
+
+permissions:
+  actions: write
+  contents: read
 
 jobs:
   deploy:

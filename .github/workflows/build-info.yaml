@@ -1,9 +1,9 @@
-name: Build ms_info and Push Docker Image to ECR
+name: Build_ms_info
 
 on:
   push:
     branches:
-      - main
+      - trunk
       - feature/*
 
 jobs:
@@ -16,12 +16,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
-    - name: Verify Conventional Commits
-      uses: amannn/action-semantic-pull-request@0723387faaf9b38adef4775cd42cfd5155ed6017 # v5.5.3
-      if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v3

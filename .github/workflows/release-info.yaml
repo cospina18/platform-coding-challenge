@@ -1,15 +1,17 @@
 name: Release ms-info to EKS
 
 on:
-  push:
-    branches:
-      - trunk
-      - feature/*
+  workflow_run:
+    workflows: 
+      - Build_ms_info
+    types:
+      - completed
 
 jobs:
   deploy:
     name: Deploy to EKS
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
     - name: Checkout code
