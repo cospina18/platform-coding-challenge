@@ -1,4 +1,4 @@
-name: Build ms_suggestion and Push Docker Image to ECR
+name: Build_ms_suggestion 
 
 on:
   push:

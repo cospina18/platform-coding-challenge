@@ -1,10 +1,10 @@
 name: Release ms-info to EKS
 
 on:
-  push:
-    branches:
-      - trunk
-      - feature/*
+  workflow_run:
+    workflows: ["Build_ms_info"]
+    types:
+      - completed
 
 jobs:
   deploy:

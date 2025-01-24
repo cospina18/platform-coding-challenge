@@ -1,4 +1,4 @@
-name: Build ms_info and Push Docker Image to ECR
+name: Build_ms_info
 
 on:
   push:
