@@ -63,18 +63,10 @@ echo Crear ALB Ingress Controller
 echo ====================================================
 kubectl apply -f  $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/alb-ingress-controller.yaml
 
-echo =====================================================================
-echo Crear Ingress Service que crea los ALB para el cluster  EKS
-echo =====================================================================
-
-arncertificateext=$(aws acm list-certificates --query "CertificateSummaryList[?contains(DomainName,' ms_info.demo-riders.link')].CertificateArn" --output text)
-
-# kubectl apply -n istio-system -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/ingress.yaml
-
 echo ====================================================
 echo Instalar cluster autoscaler
 echo ====================================================
-
+# kubectl apply -n istio-system -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/ingress.yaml
 #######################################################################################
 #######################################################################################
 ##############     GENERAR ROLES PARA LOS SERVICE CONNECTION         ##################
@@ -95,5 +87,17 @@ kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/am
 kubectl create configmap cluster-info --from-literal=cluster.name=eks-p-poc --from-literal=logs.region=us-east-1 -n amazon-cloudwatch
 kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/fluentd.yaml
 
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=ms_info.demo-riders.link O=ms_info.demo-riders.link"
-kubectl create secret tls tls-cert --key tls.key --cert tls.crt
+#######################################################################################
+#######################################################################################
+##############     Cert controler       ##################
+#######################################################################################
+#######################################################################################
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.12.0/cert-manager.yaml
+kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/cluster-issuer.yaml
+kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/certificate.yaml
+kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/virtualservice.yaml
+kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/gateway.yaml
+kubectl apply -f $SYSTEM_DEFAULTWORKINGDIRECTORY/infrastructure/configuration/authorizationpolicy
+
+
+
