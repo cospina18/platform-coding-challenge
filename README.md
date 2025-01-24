@@ -1,8 +1,7 @@
 # platform-coding-challenge arquitectura de la implementacion
 # Arquitectura
 La solucion se compone de dos microservicios desplegados en EKS. Usando istio como service mesh. 
-![alt text](image.png)
-
+![alt text](arq.jpg)
 
 # Ambiente 
 El proyecto tiene 2 micros que reciben nombre, cuidad, y edad.
